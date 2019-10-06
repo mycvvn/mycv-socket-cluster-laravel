@@ -35,4 +35,15 @@ class SocketCluster
             return json_decode($response->getBody()->getContents());
         }
     }
+
+    public function createNotification($formParams)
+    {
+        $response = $this->client->request('POST', '/notifications', [
+            'form_params' => $formParams
+        ]);
+        $statusCode = $response->getStatusCode();
+        if ($statusCode >= 200 && $statusCode < 300) {
+            return json_decode($response->getBody()->getContents());
+        }
+    }
 }
